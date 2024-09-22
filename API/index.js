@@ -13,8 +13,8 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 // src/index.ts
-const database_1 = __importDefault(require("./database"));
-const app_1 = __importDefault(require("./app")); // Import the app
+const database_1 = __importDefault(require("./dist/database"));
+const app_1 = __importDefault(require("./dist/app")); // Import the app
 const PORT = process.env.PORT || 3000;
 const startApp = () => __awaiter(void 0, void 0, void 0, function* () {
     yield (0, database_1.default)();
