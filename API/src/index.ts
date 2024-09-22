@@ -1,6 +1,9 @@
 // src/index.ts
 import connectToDatabase from './database';
+import dotenv from 'dotenv';
 import app from './app'; // Import the app
+
+dotenv.config();
 const PORT = process.env.PORT || 3000;
 const startApp = async () => {
   await connectToDatabase();

@@ -14,7 +14,9 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 // src/index.ts
 const database_1 = __importDefault(require("./database"));
+const dotenv_1 = __importDefault(require("dotenv"));
 const app_1 = __importDefault(require("./app")); // Import the app
+dotenv_1.default.config();
 const PORT = process.env.PORT || 3000;
 const startApp = () => __awaiter(void 0, void 0, void 0, function* () {
     yield (0, database_1.default)();
