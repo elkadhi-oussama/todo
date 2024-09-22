@@ -1,16 +1,19 @@
 // src/app.ts
 import express, { Request, Response } from "express";
 import Todo from "./todo";
+import cors from "cors";
 
 const app = express();
+
+// Enable CORS for all routes
+app.use(cors());
 
 // Middleware to parse JSON bodies
 app.use(express.json());
 //test route
-app.get("/",async (req: Request, res: Response)=>{
-    res.status(200).send("hello api")
-})
-
+app.get("/", async (req: Request, res: Response) => {
+  res.status(200).send("hello api");
+});
 
 // Create a new Todo
 app.post("/todos", async (req: Request, res: Response) => {
@@ -68,14 +71,13 @@ app.put("/todos/:id", async (req: Request, res: Response) => {
 // Delete a Todo
 app.delete("/todos/:id", async (req: Request, res: Response) => {
   try {
-    const deletedTodo = await Todo.deleteOne({_id:req.params.id});
+    const deletedTodo = await Todo.deleteOne({ _id: req.params.id });
     if (!deletedTodo) {
       return res.status(404).json({ message: "Todo not found" });
     }
     deletedTodo.deletedCount
-    ? res.status(200).json({ message: "Todo deleted" })
-    : res.status(200).json({ message: "the todo already deleted" });
-   
+      ? res.status(200).json({ message: "Todo deleted" })
+      : res.status(200).json({ message: "the todo already deleted" });
   } catch (error) {
     res.status(500).json({ message: "Error deleting todo", error });
   }

@@ -15,7 +15,10 @@ Object.defineProperty(exports, "__esModule", { value: true });
 // src/app.ts
 const express_1 = __importDefault(require("express"));
 const todo_1 = __importDefault(require("./todo"));
+const cors_1 = __importDefault(require("cors"));
 const app = (0, express_1.default)();
+// Enable CORS for all routes
+app.use((0, cors_1.default)());
 // Middleware to parse JSON bodies
 app.use(express_1.default.json());
 //test route
