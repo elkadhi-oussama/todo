@@ -6,7 +6,9 @@ import cors from "cors";
 const app = express();
 
 // Enable CORS for all routes
-app.use(cors());
+app.use(cors({
+  origin: '*'
+}));
 
 // Middleware to parse JSON bodies
 app.use(express.json());
