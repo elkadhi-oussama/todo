@@ -10,7 +10,7 @@ const App: React.FC = () => {
     useEffect(() => {
         const fetchTodos = async () => {
             try {
-                const response = await fetch('http://localhost:5000/todos');
+                const response = await fetch('https://apis-todo-server.vercel.app/todos');
                 const data = await response.json();
                 setTodos(data); // Assuming the backend returns an array of todos with _id
             } catch (error) {
@@ -30,7 +30,7 @@ const App: React.FC = () => {
         };
 
         try {
-            const response = await fetch('http://localhost:5000/todos', {
+            const response = await fetch('https://apis-todo-server.vercel.app/todos', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -53,7 +53,7 @@ const App: React.FC = () => {
         const updatedTodo = { ...todoToUpdate, completed: !todoToUpdate.completed };
 
         try {
-            await fetch(`http://localhost:5000/todos/${_id}`, {
+            await fetch(`https://apis-todo-server.vercel.app/todos/${_id}`, {
                 method: 'PUT',
                 headers: {
                     'Content-Type': 'application/json',
@@ -72,7 +72,7 @@ const App: React.FC = () => {
     // Function to delete a todo by its ID
     const deleteTodo = async (_id: string) => {
         try {
-            await fetch(`http://localhost:5000/todos/${_id}`, {
+            await fetch(`https://apis-todo-server.vercel.app/todos/${_id}`, {
                 method: 'DELETE',
             });
             setTodos((prevTodos) => prevTodos.filter(todo => todo._id !== _id));
