@@ -1,47 +1,47 @@
-// Importing necessary libraries
-import React, { useState } from 'react'; // Importing React and useState hook for state management
+import React, { useState } from 'react';
 
-// Defining the interface for the props expected by the AddTodo component
 interface AddTodoProps {
-    addTodo: (text: string) => void; // Function to add a todo, accepting a string as input
+    addTodo: (text: string) => void;
 }
 
-// Functional component definition
 const AddTodo: React.FC<AddTodoProps> = ({ addTodo }) => {
-    // State to hold the input text for the new todo
     const [input, setInput] = useState('');
+    const [error, setError] = useState('');
 
-    // Function to handle form submission
     const handleSubmit = (e: React.FormEvent) => {
-        e.preventDefault(); // Prevent the default form submission behavior
-        // Check if input is not just whitespace
+        e.preventDefault();
         if (input.trim()) {
-            addTodo(input); // Call the addTodo function passed via props
-            setInput(''); // Clear the input field after adding the todo
+            addTodo(input);
+            setInput('');
+            setError('');
+        } else {
+            setError('Please enter a valid todo.');
         }
     };
 
-    // Rendering the input form for adding todos
     return (
-        <form onSubmit={handleSubmit} className="flex mb-4">
-            {/* Input field for entering new todo */}
+        <form onSubmit={handleSubmit} className="flex flex-col mb-4">
             <input 
-                type="text" // Input type is text
-                value={input} // Controlled input value from state
-                onChange={(e) => setInput(e.target.value)} // Update state on input change
-                placeholder="Add a new todo" // Placeholder text for the input
-                className="border border-gray-300 rounded-md p-2 flex-grow mr-2" // Tailwind CSS classes for styling
+                type="text"
+                value={input}
+                onChange={(e) => setInput(e.target.value)}
+                placeholder="Add a new todo"
+                className="border border-gray-300 rounded-md p-2 mb-2" // Margin bottom for spacing
             />
-            {/* Submit button to add the todo */}
             <button 
-                type="submit" // Button type is submit
-                className="bg-blue-500 text-white rounded-md px-4 py-2" // Tailwind CSS classes for styling
+                type="submit"
+                className="bg-blue-500 text-white rounded-md px-4 py-2 mb-2 transition duration-300 ease-in-out hover:bg-blue-600"
+                
             >
                 Add
             </button>
+            {error && (
+                <p className="text-red-500 mt-2 text-sm font-medium"> {/* Error message styles */}
+                    {error}
+                </p>
+            )}
         </form>
     );
 };
 
-// Exporting the AddTodo component for use in other parts of the application
 export default AddTodo;
